@@ -1,0 +1,22 @@
+{
+  "name": "discord-plays-pokemon",
+  "version": "1.0.0",
+  "description": "A spinoff of the ChatPlaysPokemon using Discord as the sharing platform",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sunjaeyoon/discord-plays-pokemon.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sunjaeyoon/discord-plays-pokemon/issues"
+  },
+  "homepage": "https://github.com/sunjaeyoon/discord-plays-pokemon#readme",
+  "dependencies": {
+    "discord": "^0.8.2"
+  }
+}
