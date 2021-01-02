@@ -8,4 +8,6 @@ NodeJs will require discord.js
 
 Download an emulator for GBA and set it as the default window
 You can then invite people to your discord channel to play any gba game
-together as a team
+together as a team.
+
+To start the program use node bot.js
