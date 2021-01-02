@@ -2,6 +2,17 @@ const Discord = require("discord.js");
 const path = require("path");
 const {spawn} = require("child_process");
 
+const commands = {'a':'a',
+                  'b':'b',
+                  'x':'x', 
+                  'y':'y',
+                  'select': 'e', 
+                  'start':'s',
+                  'right':'right',
+                  'left':'left',
+                  'up':'up',
+                  'down':'down'}
+
 class Main {
     constructor(bot) {
         this.client = bot;
@@ -37,11 +48,34 @@ class Main {
                 console.log(msg.content)
 
                 let words = msg.content.toLowerCase().split(" ");
-                var process = spawn('python3',["gamecommands.py", words[0]] );
-                process.stdout.on('data', (data) => {
-                    console.log(data)
+                switch(word[0]){
+                    case 'a':
+                        var process = spawn('python3',["gamecommands.py", commands['a']]);
+                        break;
+                    case 'b':
+                        var process = spawn('python3',["gamecommands.py", commands['b']] );
+                        break;
+                    case 'up':
+                        var process = spawn('python3',["gamecommands.py", commands['up']] );
+                        break;
+                    case 'down':
+                        var process = spawn('python3',["gamecommands.py", commands['down']] );
+                        break;
+                    case 'left':
+                        var process = spawn('python3',["gamecommands.py", commands['left']] );
+                        break;
+                    case 'right':
+                        var process = spawn('python3',["gamecommands.py", commands['right']] );
+                        break;
+                    case 'start':
+                        var process = spawn('python3',["gamecommands.py", commands['start']] );
+                        break;
+                    case 'select':
+                        var process = spawn('python3',["gamecommands.py", commands['select']] );
+                        break;
+                }
                 });
-            }); 
+         
         };
 
 
