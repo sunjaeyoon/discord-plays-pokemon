@@ -14,5 +14,6 @@ const client = new Client();
 var bot = new Comm.Main(client);
 bot.On();
 bot.Com1();
+bot.Com2();
 
 client.login(process.env.DISCORDJS_BOT_TOKEN);
