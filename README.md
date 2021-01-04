@@ -11,3 +11,5 @@ You can then invite people to your discord channel to play any gba game
 together as a team.
 
 To start the program use node bot.js
+*There is a python3.9 version of the code that also runs the same
+thing -> python py39discord.py
