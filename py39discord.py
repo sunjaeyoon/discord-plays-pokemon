@@ -43,7 +43,8 @@ async def on_message(message):
         await message.channel.send(response)
     
     elif message.content.lower() in commands.keys():
-        press(commands[message.content.lower()])
+        print("Here")
+        #press(commands[message.content.lower()])
 
     elif message.content == 'raise-exception':
         raise discord.DiscordException
