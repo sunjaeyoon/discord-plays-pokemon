@@ -2,12 +2,12 @@ const Discord = require("discord.js");
 const path = require("path");
 const {spawn} = require("child_process");
 
-const commands = {'a':'a',
-                  'b':'b',
-                  'x':'x', 
-                  'y':'y',
-                  'select': 'e', 
-                  'start':'s',
+const commands = {'a':'x',
+                  'b':'z',
+                  //'x':'x', 
+                  //'y':'y',
+                  'select': 'shift', 
+                  'start':'enter',
                   'right':'right',
                   'left':'left',
                   'up':'up',
@@ -45,10 +45,10 @@ class Main {
     Com2() {
             this.client.on("message", (msg) => {
                 if (msg.author.bot){return} //Ignore bot messages
-                console.log(msg.content)
+                console.log(`${msg.username} ${msg.content}`)
 
                 let words = msg.content.toLowerCase().split(" ");
-                switch(word[0]){
+                switch(words[0]){
                     case 'a':
                         var process = spawn('python3',["gamecommands.py", commands['a']]);
                         break;
