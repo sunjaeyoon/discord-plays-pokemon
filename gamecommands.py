@@ -6,9 +6,9 @@ import sys
 
 def press(key):
     #if key in keys:
-	pag.keyDown(key)
-	time.sleep(0.000000001)
-	pag.keyUp(key)
+    pag.keyDown(key)
+    time.sleep(0.000000001)
+    pag.keyUp(key)
 
 if __name__ == "__main__":
     press(sys.argv[1])
