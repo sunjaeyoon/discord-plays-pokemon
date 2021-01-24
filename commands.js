@@ -16,6 +16,7 @@ const commands = {'a':'x',
 class Main {
     constructor(bot) {
         this.client = bot;
+        this.mode = 'none';
       }
     On(){
         this.client.on('ready', () => {
