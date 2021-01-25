@@ -26,14 +26,16 @@ class Main {
     }
 
     reset_vote(){
-        this.votes = {'a': 0,
-        'b': 0,
-        'select': 0, 
-        'start': 0,
-        'right': 0 ,
-        'left': 0,
-        'up': 0,
-        'down':0 };
+        this.votes = {
+            'down':0,  
+            'right': 0 ,
+            'select': 0, 
+            'start': 0,
+            'left': 0,
+            'up': 0,
+            'b': 0,
+            'a': 0
+        };
     }
     
     On(){
@@ -125,10 +127,12 @@ class Main {
                                     if (this.mode === 'democracy'){    
                                         console.log(this.votes);
                                         var popular = Object.keys(this.votes).reduce((a, b) => this.votes[a] > this.votes[b] ? a : b);
+                                        xonsole.log(`pressing ${popular}`)
                                         var process = spawn('python3',["gamecommands.py", popular] );
-                                    } else if (this.mode === 'anarachy'){
+                                    } else if (this.mode === 'anarchy'){
                                         console.log(this.votes);
                                         var unpopular = Object.keys(this.votes).reduce((a, b) => this.votes[a] < this.votes[b] ? a : b);
+                                        console.log(`pressing ${unpopular}`)
                                         var process = spawn('python3',["gamecommands.py", unpopular] );
                                     }
                                     this.reset_vote();
