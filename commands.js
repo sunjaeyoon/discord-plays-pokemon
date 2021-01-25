@@ -67,7 +67,7 @@ class Main {
     Com2() {
             this.client.on("message", (msg) => {
                 if (msg.author.bot){return} //Ignore bot messages
-                console.log(`${msg.username} ${msg.content}`)
+                //console.log(`${msg.username} ${msg.content}`)
 
                 let words = msg.content.toLowerCase().split(" ");
                     
