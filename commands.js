@@ -17,7 +17,7 @@ class Main {
     constructor(bot) {
         this.client = bot;
         this.mode = 'none';
-        this.timer_mode = 100; //An hour
+        this.timer_mode = 30 * 60 * 1000; // 30 min * 60 seconds && 1 second = 1000 msec
         this.timer_vote = 1000; // A second
         this.reset_vote();
 
@@ -96,28 +96,18 @@ class Main {
                             var process = spawn('python3',["gamecommands.py", commands['select']] );
                             break;
                         case 'democracy':
-                            this.mode = 'democracy';
+                        case 'anarchy':
+                        case 'none':
+                            this.mode = words[0];
                             this.allowed_to_change_mode = false;
                             console.log(`${this.mode} has been Declared`);
                             
                             setTimeout(() =>{
                                 this.allowed_to_change_mode = true;
                                 console.log("Mode Change allowed");
-                            }, this.timer_mode*1000);
+                            }, this.timer_mode);
                             
-                            break;
-                        case 'anarchy':
-                            this.mode = 'anarchy';
-                            this.allowed_to_change_mode = false;
-                            console.log(`${this.mode} has been Declared`);
-
-                            setTimeout(() =>{
-                                this.allowed_to_change_mode = true;
-                                console.log("Mode Change Allowed");
-                            }, this.timer_mode*1000);
-
-                            break;
-
+                            break
                     }
                 } else {
                     switch(words[0]){
@@ -140,23 +130,13 @@ class Main {
                             }
                             break;
                         case 'democracy':
+                        case 'anarchy':
+                        case 'none':    
                             if (this.allowed_to_change_mode){
-                                this.mode = 'democracy';
+                                this.mode = words[0];
                                 console.log(`${this.mode} has been Declared`);
                             }
                             break;
-                        case 'anarchy':
-                            if (this.allowed_to_change_mode){
-                                this.mode = 'anarchy';
-                                console.log(`${this.mode} has been Declared`);
-                                break;
-                            }
-                        case 'none':
-                            if (this.allowed_to_change_mode){
-                                this.mode = 'none';
-                                console.log(`${this.mode} has been Declared`);
-                                break;
-                            }
                     };
                 }  
             }
