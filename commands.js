@@ -123,7 +123,13 @@ class Main {
                             if (this.allowed_to_run) {
                                 this.allowed_to_run = false;
                                 setTimeout(() => {
-                                    console.log(this.votes);
+                                    if (this.mode === 'democracy'){    
+                                        console.log(this.votes);
+                                        var process = spawn('python3',["gamecommands.py", popular choice] );
+                                    } else if (this.mode === 'anarachy'){
+                                        console.log(this.votes);
+                                        var process = spawn('python3',["gamecommands.py", unpopular choice] );
+                                    }
                                     this.reset_vote();
                                     this.allowed_to_run = true;
                                 }, this.timer_vote);
