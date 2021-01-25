@@ -17,7 +17,26 @@ class Main {
     constructor(bot) {
         this.client = bot;
         this.mode = 'none';
-      }
+        this.timer_mode = 100; //An hour
+        this.timer_vote = 1000; // A second
+        this.reset_vote();
+
+        this.allowed_to_change_mode = true;
+        this.allowed_to_run = true;
+    }
+
+    reset_vote(){
+        this.votes = {'a': 0,
+        'b': 0,
+        'select': 0, 
+        'start': 0,
+        'right': 0 ,
+        'left': 0,
+        'up': 0,
+        'down':0 };
+    }
+    
+    
     On(){
         this.client.on('ready', () => {
             console.log(`Logged in as ${this.client.user.tag}!`);
@@ -41,7 +60,7 @@ class Main {
                     break;
             }
         });
-    }      
+    }   
 
     Com2() {
             this.client.on("message", (msg) => {
@@ -49,35 +68,100 @@ class Main {
                 console.log(`${msg.username} ${msg.content}`)
 
                 let words = msg.content.toLowerCase().split(" ");
-                switch(words[0]){
-                    case 'a':
-                        var process = spawn('python3',["gamecommands.py", commands['a']]);
-                        break;
-                    case 'b':
-                        var process = spawn('python3',["gamecommands.py", commands['b']] );
-                        break;
-                    case 'up':
-                        var process = spawn('python3',["gamecommands.py", commands['up']] );
-                        break;
-                    case 'down':
-                        var process = spawn('python3',["gamecommands.py", commands['down']] );
-                        break;
-                    case 'left':
-                        var process = spawn('python3',["gamecommands.py", commands['left']] );
-                        break;
-                    case 'right':
-                        var process = spawn('python3',["gamecommands.py", commands['right']] );
-                        break;
-                    case 'start':
-                        var process = spawn('python3',["gamecommands.py", commands['start']] );
-                        break;
-                    case 'select':
-                        var process = spawn('python3',["gamecommands.py", commands['select']] );
-                        break;
-                }
-                });
-         
-        };
+                    
+                if (this.mode === "none"){
+                    switch(words[0]){
+                        case 'a':
+                            var process = spawn('python3',["gamecommands.py", commands['a']]);
+                            break;
+                        case 'b':
+                            var process = spawn('python3',["gamecommands.py", commands['b']] );
+                            break;
+                        case 'up':
+                            var process = spawn('python3',["gamecommands.py", commands['up']] );
+                            break;
+                        case 'down':
+                            var process = spawn('python3',["gamecommands.py", commands['down']] );
+                            break;
+                        case 'left':
+                            var process = spawn('python3',["gamecommands.py", commands['left']] );
+                            break;
+                        case 'right':
+                            var process = spawn('python3',["gamecommands.py", commands['right']] );
+                            break;
+                        case 'start':
+                            var process = spawn('python3',["gamecommands.py", commands['start']] );
+                            break;
+                        case 'select':
+                            var process = spawn('python3',["gamecommands.py", commands['select']] );
+                            break;
+                        case 'democracy':
+                            this.mode = 'democracy';
+                            this.allowed_to_change_mode = false;
+                            console.log(`${this.mode} has been Declared`);
+                            
+                            setTimeout(() =>{
+                                this.allowed_to_change_mode = true;
+                                console.log("Mode Change allowed");
+                            }, this.timer_mode*1000);
+                            
+                            break;
+                        case 'anarchy':
+                            this.mode = 'anarchy';
+                            this.allowed_to_change_mode = false;
+                            console.log(`${this.mode} has been Declared`);
+
+                            setTimeout(() =>{
+                                this.allowed_to_change_mode = true;
+                                console.log("Mode Change Allowed");
+                            }, this.timer_mode*1000);
+
+                            break;
+
+                    }
+                } else {
+                    switch(words[0]){
+                        case 'a':
+                        case 'b':
+                        case 'up':
+                        case 'down':
+                        case 'left':
+                        case 'right':
+                        case 'start':
+                        case 'select':
+                            this.votes[words[0]]++;
+                            if (this.allowed_to_run) {
+                                this.allowed_to_run = false;
+                                setTimeout(() => {
+                                    console.log(this.votes);
+                                    this.reset_vote();
+                                    this.allowed_to_run = true;
+                                }, this.timer_vote);
+                            }
+                            break;
+                        case 'democracy':
+                            if (this.allowed_to_change_mode){
+                                this.mode = 'democracy';
+                                console.log(`${this.mode} has been Declared`);
+                            }
+                            break;
+                        case 'anarchy':
+                            if (this.allowed_to_change_mode){
+                                this.mode = 'anarchy';
+                                console.log(`${this.mode} has been Declared`);
+                                break;
+                            }
+                        case 'none':
+                            if (this.allowed_to_change_mode){
+                                this.mode = 'none';
+                                console.log(`${this.mode} has been Declared`);
+                                break;
+                            }
+                    };
+                }  
+            }
+        );
+    };
 
 
 }
