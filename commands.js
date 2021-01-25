@@ -18,7 +18,7 @@ class Main {
         this.client = bot;
         this.mode = 'none';
         this.timer_mode = 30 * 60 * 1000; // 30 min * 60 seconds && 1 second = 1000 msec
-        this.timer_vote = 1000; // A second
+        this.timer_vote = 100; // A second
         this.reset_vote();
 
         this.allowed_to_change_mode = true;
@@ -36,12 +36,12 @@ class Main {
         'down':0 };
     }
     
-    
     On(){
         this.client.on('ready', () => {
             console.log(`Logged in as ${this.client.user.tag}!`);
           });
     }
+
     Com1() {
         this.client.on("message", (msg) => {
             if (msg.author.bot){return}
@@ -106,7 +106,6 @@ class Main {
                                 this.allowed_to_change_mode = true;
                                 console.log("Mode Change allowed");
                             }, this.timer_mode);
-                            
                             break
                     }
                 } else {
@@ -125,10 +124,12 @@ class Main {
                                 setTimeout(() => {
                                     if (this.mode === 'democracy'){    
                                         console.log(this.votes);
-                                        var process = spawn('python3',["gamecommands.py", popular choice] );
+                                        var popular = Object.keys(this.votes).reduce((a, b) => this.votes[a] > this.votes[b] ? a : b);
+                                        var process = spawn('python3',["gamecommands.py", popular] );
                                     } else if (this.mode === 'anarachy'){
                                         console.log(this.votes);
-                                        var process = spawn('python3',["gamecommands.py", unpopular choice] );
+                                        var unpopular = Object.keys(this.votes).reduce((a, b) => this.votes[a] < this.votes[b] ? a : b);
+                                        var process = spawn('python3',["gamecommands.py", unpopular] );
                                     }
                                     this.reset_vote();
                                     this.allowed_to_run = true;
