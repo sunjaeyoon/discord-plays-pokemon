@@ -18,7 +18,7 @@ class Main {
         this.client = bot;
         this.mode = 'none';
         this.timer_mode = 10 * 60 * 1000; // 30 min * 60 seconds && 1 second = 1000 msec
-        this.timer_vote = 100; // A second
+        this.timer_vote = 1000; // A second
         this.reset_vote();
 
         this.allowed_to_change_mode = true;
