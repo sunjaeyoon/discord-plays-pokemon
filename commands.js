@@ -125,14 +125,14 @@ class Main {
                                 this.allowed_to_run = false;
                                 setTimeout(() => {
                                     if (this.mode === 'democracy'){    
-                                        msg.channel.send(this.votes);
+                                        //msg.channel.send(this.votes);
                                         var popular = Object.keys(this.votes).reduce((a, b) => this.votes[a] > this.votes[b] ? a : b);
-                                        //console.log(`pressing ${popular}`)
+                                        msg.channel.send(`pressing ${popular}`)
                                         var process = spawn('python3',["gamecommands.py", commands[popular]] );
                                     } else if (this.mode === 'anarchy'){
-                                        msg.channel.send(this.votes);
+                                        //msg.channel.send(this.votes);
                                         var unpopular = Object.keys(this.votes).reduce((a, b) => this.votes[a] < this.votes[b] ? a : b);
-                                        //console.log(`pressing ${unpopular}`)
+                                        msg.channel.send(`pressing ${unpopular}`)
                                         var process = spawn('python3',["gamecommands.py", commands[unpopular]] );
                                     }
                                     this.reset_vote();
