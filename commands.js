@@ -128,12 +128,12 @@ class Main {
                                         msg.send(this.votes);
                                         var popular = Object.keys(this.votes).reduce((a, b) => this.votes[a] > this.votes[b] ? a : b);
                                         //console.log(`pressing ${popular}`)
-                                        var process = spawn('python3',["gamecommands.py", popular] );
+                                        var process = spawn('python3',["gamecommands.py", commands[popular]] );
                                     } else if (this.mode === 'anarchy'){
                                         msg.send(this.votes);
                                         var unpopular = Object.keys(this.votes).reduce((a, b) => this.votes[a] < this.votes[b] ? a : b);
                                         //console.log(`pressing ${unpopular}`)
-                                        var process = spawn('python3',["gamecommands.py", unpopular] );
+                                        var process = spawn('python3',["gamecommands.py", commands[unpopular]] );
                                     }
                                     this.reset_vote();
                                     this.allowed_to_run = true;
