@@ -16,7 +16,7 @@ const commands = {'a':'x',
 class Main {
     constructor(bot) {
         this.client = bot;
-        this.mode = 'none';
+        this.mode = 'freedom';
         this.timer_mode = 10 * 60 * 1000; // 30 min * 60 seconds && 1 second = 1000 msec
         this.timer_vote = 1000; // A second
         this.reset_vote();
@@ -99,15 +99,20 @@ class Main {
                             break;
                         case 'democracy':
                         case 'anarchy':
-                        case 'none':
+                        case 'freedom':
                             this.mode = words[0];
                             this.allowed_to_change_mode = false;
-                            msg.channel.send(`${this.mode} has been Declared`);
+                            msg.channel.send(`${this.mode} has been declared`);
                             
                             setTimeout(() =>{
                                 this.allowed_to_change_mode = true;
                                 msg.channel.send("Mode Change allowed");
                             }, this.timer_mode);
+                            
+                            setTimeout(() =>{
+                                this.mode = 'freedom';
+                                msg.channel.send("Mode back to freedom");
+                            }, 5 * 60 * 1000);
                             break
                     }
                 } else {
@@ -142,10 +147,10 @@ class Main {
                             break;
                         case 'democracy':
                         case 'anarchy':
-                        case 'none':    
+                        case 'freedom':    
                             if (this.allowed_to_change_mode){
                                 this.mode = words[0];
-                                msg.channel.send(`${this.mode} has been Declared`);
+                                msg.channel.send(`${this.mode} has been declared`);
                             }
                             break;
                     };
