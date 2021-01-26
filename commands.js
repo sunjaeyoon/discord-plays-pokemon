@@ -102,11 +102,11 @@ class Main {
                         case 'none':
                             this.mode = words[0];
                             this.allowed_to_change_mode = false;
-                            console.log(`${this.mode} has been Declared`);
+                            msg.channel.send(`${this.mode} has been Declared`);
                             
                             setTimeout(() =>{
                                 this.allowed_to_change_mode = true;
-                                console.log("Mode Change allowed");
+                                msg.channel.send("Mode Change allowed");
                             }, this.timer_mode);
                             break
                     }
@@ -125,12 +125,12 @@ class Main {
                                 this.allowed_to_run = false;
                                 setTimeout(() => {
                                     if (this.mode === 'democracy'){    
-                                        msg.send(this.votes);
+                                        msg.channel.send(this.votes);
                                         var popular = Object.keys(this.votes).reduce((a, b) => this.votes[a] > this.votes[b] ? a : b);
                                         //console.log(`pressing ${popular}`)
                                         var process = spawn('python3',["gamecommands.py", commands[popular]] );
                                     } else if (this.mode === 'anarchy'){
-                                        msg.send(this.votes);
+                                        msg.channel.send(this.votes);
                                         var unpopular = Object.keys(this.votes).reduce((a, b) => this.votes[a] < this.votes[b] ? a : b);
                                         //console.log(`pressing ${unpopular}`)
                                         var process = spawn('python3',["gamecommands.py", commands[unpopular]] );
@@ -145,7 +145,7 @@ class Main {
                         case 'none':    
                             if (this.allowed_to_change_mode){
                                 this.mode = words[0];
-                                console.log(`${this.mode} has been Declared`);
+                                msg.channel.send(`${this.mode} has been Declared`);
                             }
                             break;
                     };
