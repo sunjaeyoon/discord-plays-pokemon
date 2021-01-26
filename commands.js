@@ -71,7 +71,7 @@ class Main {
 
                 let words = msg.content.toLowerCase().split(" ");
                     
-                if (this.mode === "none"){
+                if (this.mode === "freedom"){
                     switch(words[0]){
                         case 'a':
                             var process = spawn('python3',["gamecommands.py", commands['a']]);
